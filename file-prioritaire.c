@@ -26,7 +26,8 @@ void push(int data, int prio)
         front = rear = cree(data, prio);
     }
     // 2eme cas : inserstion au debut
-    else if (front->priorite > prio)
+
+    else if ( front->priorite > prio)
     {
         node *ptr = cree(data, prio);
         ptr->next = front;
@@ -35,18 +36,18 @@ void push(int data, int prio)
     // 3eme cas : insertion au milieu
     else if (rear->priorite > prio)
     {
-        node *ptr = front;
-        node *ptr2 = front;
-        while (ptr->priorite < prio)
+        node *current = front;
+        node *previous = front;
+        while ( current != NULL && current->priorite < prio)
         {
-            ptr2 = ptr;
-            ptr = ptr->next;
+            previous = current;
+            current = current->next;
         }
         node *new = cree(data, prio);
-        new->next = ptr;
-        ptr2->next = new;
+        new->next = current;
+        previous->next = new;
     }
-    //la 4eme cas : insertion au fin 
+    //la 4eme cas : insertion au fin
     else
     {
         node *new = cree(data, prio);
